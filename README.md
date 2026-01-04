@@ -1,1 +1,50 @@
-# hotelmanagement_c-
+# hotelmanagement_csharp
+
+**Hotel Management System (WPF)**
+
+A modern, desktop-based Hotel Management Application built with C#, WPF (Windows Presentation Foundation), and the MVVM (Model-View-ViewModel) architectural pattern.
+
+
+**Purpose of the Project ın Full Scale**
+
+The main goal of this project is to modernize hotel management by replacing old-fashioned, complicated tables and spreadsheets with a visual and user-friendly system. By using the powerful features of WPF, the application provides hotel staff with an intuitive, card-based dashboard. This design makes it much easier to manage room assignments, guest check-ins, and cleaning tasks, even during the busiest hours of the day. Our focus is to simplify the daily workload of hotel employees, improve communication between the front desk and housekeeping, and provide a solid technical structure that can grow with the hotel's needs. In full scale, the application would be able to manage even the biggest hotels easily with database connections, real time features, authentication system for many workers to use at the same time.
+
+
+**Features in this Demo**
+
+**Housekeeping:** Dedicated status for rooms that "Need Cleaning" after checkout.
+
+**Filtering:** Filter rooms by type (Suite, Single, Double) or availability.
+
+**Reservation Management:** Fast guest check-in and automated fee calculation based on daily rates.
+
+**Activity Logs:** A recent activity sidebar to track the history of bookings and payments.
+
+
+**Architecture & Class Structure**
+
+  Models
+    Room.cs: Represents the core entity.
+    Booking.cs: Stores reservation details.
+    
+  ViewModels
+  The logic layer that connects the Data to the UI.
+
+    MainViewModel.cs:
+      RoomsView: An ICollectionView used for filtering and sorting the room list.
+      ReserveRoomCommand(): Logic to assign a guest to a selected room.
+      CheckOutCommand(): Handles payment calculation and triggers the cleaning status.
+
+    RoomViewModel.cs: A wrapper for the Room model to handle UI-specific property change notifications (INotifyPropertyChanged).
+
+    BookingViewModel: 
+      CalculateStayDuration(DateTime checkIn, DateTime checkOut): Calculates the time difference between dates. It uses Math.Ceiling to ensure even a           partial day is billed as a full day.
+
+      GenerateInvoice(decimal dailyRate): Multiplies the stay duration by the room's specific rate to create the final billing amount.
+
+      ArchiveBooking(): Saves the completed transaction into the "Recent Activity" list for record-keeping.
+      
+  Views
+    MainWindow.xaml: The primary dashboard using ControlTemplates for the modern Card UI.
+    AddRoomWindow.xaml: A dialog for adding new rooms to the system inventory.
+
